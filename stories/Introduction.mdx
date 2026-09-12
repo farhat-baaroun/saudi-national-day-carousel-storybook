@@ -4,10 +4,9 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 # Saudi National Day Carousel
 
-This Storybook repo loads the **UMD widget** from the sibling `saudi-national-day-carousel` workspace package — the same file a host page would pull from npm or a CDN.
+Stories load the published **UMD** from [npm](https://www.npmjs.com/package/saudi-national-day-carousel) via jsDelivr or unpkg — the same URLs a host page would use.
 
-1. From the workspace root, `npm run build` writes `packages/carousel/dist/saudi-national-day-carousel.umd.js`
-2. Storybook serves that file at `/umd/...` (Local bundle)
-3. After `npm publish` in the carousel package, switch **UMD source** to jsDelivr or unpkg
+- jsDelivr: `https://cdn.jsdelivr.net/npm/saudi-national-day-carousel@1.0.0/dist/saudi-national-day-carousel.umd.js`
+- unpkg: `https://unpkg.com/saudi-national-day-carousel@1.0.0/dist/saudi-national-day-carousel.umd.js`
 
-Use **Fit Lab** to resize the parent, flip RTL/LTR, and tune motion. Compact peek appears around `390×760`.
+Use **Fit Lab** to resize the parent, flip RTL/LTR, and tune motion. Compact peek appears around `390×760`. Switch **UMD source** to compare CDNs.

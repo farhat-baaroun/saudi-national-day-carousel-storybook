@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { JSDELIVR_UMD, LOCAL_UMD, UNPKG_UMD, loadUmdScript } from "./umd";
+import { JSDELIVR_UMD, UNPKG_UMD, loadUmdScript } from "./umd";
 
 type StoryArgs = {
   bundle: string;
@@ -72,7 +72,7 @@ const meta = {
   title: "Carousel/UMD",
   component: UmdHost,
   args: {
-    bundle: LOCAL_UMD,
+    bundle: JSDELIVR_UMD,
     width: 1440,
     height: 491,
     dir: "rtl",
@@ -86,7 +86,7 @@ const meta = {
     bundle: {
       name: "UMD source",
       control: "select",
-      options: [LOCAL_UMD, JSDELIVR_UMD, UNPKG_UMD],
+      options: [JSDELIVR_UMD, UNPKG_UMD],
       table: { category: "Bundle" },
     },
     width: { control: { type: "range", min: 320, max: 1600, step: 10 }, table: { category: "Fit" } },
@@ -118,7 +118,11 @@ export const Wide: Story = { args: { width: 1440, height: 491 } };
 export const Mid: Story = { args: { width: 900, height: 380, autoplay: false } };
 export const Narrow: Story = { args: { width: 390, height: 760, autoplay: false } };
 export const LTR: Story = { args: { width: 900, height: 380, dir: "ltr", autoplay: false } };
-export const FromCdn: Story = {
+export const FromJsDelivr: Story = {
   name: "From jsDelivr",
   args: { bundle: JSDELIVR_UMD, autoplay: false },
+};
+export const FromUnpkg: Story = {
+  name: "From unpkg",
+  args: { bundle: UNPKG_UMD, autoplay: false },
 };

@@ -2,22 +2,17 @@
 
 GitHub: [farhat-baaroun/saudi-national-day-carousel-storybook](https://github.com/farhat-baaroun/saudi-national-day-carousel-storybook)
 
-Independent Storybook app for [`saudi-national-day-carousel`](https://github.com/farhat-baaroun/saudi-national-day-carousel).
+Independent Storybook for [`saudi-national-day-carousel` on npm](https://www.npmjs.com/package/saudi-national-day-carousel).
 
-Stories live in `stories/` and mount the published UMD (`SaudiNationalDayCarousel.mount()`), not the library source.
-
-## Local workspace
-
-From the monorepo root:
+Stories call `SaudiNationalDayCarousel.mount()` after loading the published UMD from **jsDelivr** (default) or **unpkg**.
 
 ```bash
 npm install
-npm run build
 npm run storybook
 ```
 
-Storybook serves the sibling package’s UMD at `/umd/saudi-national-day-carousel.umd.js`.
+```bash
+npm run build-storybook
+```
 
-## After npm publish
-
-In **Fit Lab**, switch **UMD source** to jsDelivr or unpkg, or open the **From jsDelivr** story.
+Vercel serves `storybook-static`.

@@ -11,11 +11,11 @@ export type UmdApi = {
   unmount: (target: string | Element) => void;
 };
 
-export const LOCAL_UMD = "/umd/saudi-national-day-carousel.umd.js";
-export const JSDELIVR_UMD =
-  "https://cdn.jsdelivr.net/npm/saudi-national-day-carousel/dist/saudi-national-day-carousel.umd.js";
-export const UNPKG_UMD =
-  "https://unpkg.com/saudi-national-day-carousel/dist/saudi-national-day-carousel.umd.js";
+const PACKAGE = "saudi-national-day-carousel@1.0.0";
+const UMD_FILE = "dist/saudi-national-day-carousel.umd.js";
+
+export const JSDELIVR_UMD = `https://cdn.jsdelivr.net/npm/${PACKAGE}/${UMD_FILE}`;
+export const UNPKG_UMD = `https://unpkg.com/${PACKAGE}/${UMD_FILE}`;
 
 export function getUmd(): UmdApi {
   const api = (window as unknown as { SaudiNationalDayCarousel?: UmdApi }).SaudiNationalDayCarousel;
@@ -35,6 +35,7 @@ export function loadUmdScript(src: string): Promise<UmdApi> {
     const script = document.createElement("script");
     script.src = src;
     script.async = true;
+    script.crossOrigin = "anonymous";
     script.dataset.sndUmd = src;
     script.onload = () => {
       try {

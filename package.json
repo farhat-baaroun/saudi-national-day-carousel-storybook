@@ -13,9 +13,6 @@
     "test:storybook": "vitest run",
     "docs:llms": "storybook-llms-extractor --config llms.config.js"
   },
-  "dependencies": {
-    "saudi-national-day-carousel": "*"
-  },
   "devDependencies": {
     "@chromatic-com/storybook": "latest",
     "@storybook/addon-a11y": "^10.6.0",
