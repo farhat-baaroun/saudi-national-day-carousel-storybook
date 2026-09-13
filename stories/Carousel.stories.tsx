@@ -4,6 +4,7 @@ import { JSDELIVR_UMD, UNPKG_UMD, loadUmdScript } from "./umd";
 
 type StoryArgs = {
   bundle: string;
+  option: "option1" | "option2";
   width: number;
   height: number;
   dir: "rtl" | "ltr";
@@ -16,6 +17,7 @@ type StoryArgs = {
 
 function UmdHost({
   bundle,
+  option,
   width,
   height,
   dir,
@@ -42,6 +44,7 @@ function UmdHost({
           return;
         }
         handle = api.mount(hostRef.current, {
+          option,
           initialIndex,
           durationMs,
           typewriterMsPerChar,
@@ -59,7 +62,7 @@ function UmdHost({
         el.replaceChildren();
       }
     };
-  }, [autoplay, autoplayMs, bundle, durationMs, initialIndex, typewriterMsPerChar]);
+  }, [autoplay, autoplayMs, bundle, durationMs, initialIndex, option, typewriterMsPerChar]);
 
   return (
     <div dir={dir} style={{ width, height, maxWidth: "100%", resize: "both", overflow: "auto" }}>
@@ -73,6 +76,7 @@ const meta = {
   component: UmdHost,
   args: {
     bundle: JSDELIVR_UMD,
+    option: "option2",
     width: 1440,
     height: 491,
     dir: "rtl",
@@ -91,6 +95,12 @@ const meta = {
     },
     width: { control: { type: "range", min: 320, max: 1600, step: 10 }, table: { category: "Fit" } },
     height: { control: { type: "range", min: 280, max: 900, step: 10 }, table: { category: "Fit" } },
+    option: {
+      name: "Figma option",
+      control: "inline-radio",
+      options: ["option1", "option2"],
+      table: { category: "Carousel" },
+    },
     dir: { control: "inline-radio", options: ["rtl", "ltr"], table: { category: "Fit" } },
     initialIndex: {
       control: { type: "range", min: 0, max: 5, step: 1 },
@@ -114,7 +124,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const FitLab: Story = {};
-export const Wide: Story = { args: { width: 1440, height: 491 } };
+export const Option1: Story = {
+  name: "Option 1",
+  args: { option: "option1", width: 1440, height: 491, autoplay: false },
+};
+export const Wide: Story = { args: { option: "option2", width: 1440, height: 491 } };
 export const Mid: Story = { args: { width: 900, height: 380, autoplay: false } };
 export const Narrow: Story = { args: { width: 390, height: 760, autoplay: false } };
 export const LTR: Story = { args: { width: 900, height: 380, dir: "ltr", autoplay: false } };
