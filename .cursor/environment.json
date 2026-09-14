@@ -1,0 +1,11 @@
+{
+  "name": "Saudi National Day Carousel Storybook",
+  "install": "npm install && npx playwright install chromium --with-deps",
+  "terminals": [
+    {
+      "name": "storybook",
+      "command": "npm run storybook -- --no-open --ci"
+    }
+  ],
+  "ports": [{ "name": "storybook", "port": 6006 }]
+}
