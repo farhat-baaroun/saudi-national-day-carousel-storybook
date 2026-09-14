@@ -1,18 +1,14 @@
+export type CarouselOption = "option1" | "option2" | "option3" | "option4";
+
 export type UmdApi = {
   mount: (
     target: string | Element,
-    options?: {
-      option?: "option1" | "option2";
-      initialIndex?: number;
-      durationMs?: number;
-      typewriterMsPerChar?: number;
-      autoplayMs?: number | false;
-    },
+    config?: Record<string, unknown> | ((defaults: unknown) => unknown),
   ) => { unmount: () => void };
   unmount: (target: string | Element) => void;
 };
 
-const PACKAGE = "saudi-national-day-carousel@1.0.1";
+const PACKAGE = "saudi-national-day-carousel@1.1.0";
 const UMD_FILE = "dist/saudi-national-day-carousel.umd.js";
 
 export const JSDELIVR_UMD = `https://cdn.jsdelivr.net/npm/${PACKAGE}/${UMD_FILE}`;

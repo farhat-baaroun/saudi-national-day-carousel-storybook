@@ -1,14 +1,13 @@
 import { useEffect, useRef } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { JSDELIVR_UMD, UNPKG_UMD, loadUmdScript } from "./umd";
+import { JSDELIVR_UMD, UNPKG_UMD, loadUmdScript, type CarouselOption } from "./umd";
 
 type StoryArgs = {
   bundle: string;
-  option: "option1" | "option2";
+  option: CarouselOption;
   width: number;
   height: number;
-  dir: "rtl" | "ltr";
-  initialIndex: number;
+  initialIndex?: number;
   durationMs: number;
   typewriterMsPerChar: number;
   autoplay: boolean;
@@ -20,7 +19,6 @@ function UmdHost({
   option,
   width,
   height,
-  dir,
   initialIndex,
   durationMs,
   typewriterMsPerChar,
@@ -45,10 +43,10 @@ function UmdHost({
         }
         handle = api.mount(hostRef.current, {
           option,
-          initialIndex,
           durationMs,
           typewriterMsPerChar,
           autoplayMs: autoplay ? autoplayMs : false,
+          ...(initialIndex !== undefined ? { initialIndex } : {}),
         });
       })
       .catch((error) => {
@@ -65,25 +63,23 @@ function UmdHost({
   }, [autoplay, autoplayMs, bundle, durationMs, initialIndex, option, typewriterMsPerChar]);
 
   return (
-    <div dir={dir} style={{ width, height, maxWidth: "100%", resize: "both", overflow: "auto" }}>
+    <div style={{ width, height, maxWidth: "100%", resize: "both", overflow: "auto" }}>
       <div ref={hostRef} style={{ width: "100%", height: "100%" }} />
     </div>
   );
 }
 
 const meta = {
-  title: "Carousel/UMD",
+  title: "Carousel/Options",
   component: UmdHost,
   args: {
     bundle: JSDELIVR_UMD,
     option: "option2",
     width: 1440,
     height: 491,
-    dir: "rtl",
-    initialIndex: 5,
     durationMs: 700,
     typewriterMsPerChar: 70,
-    autoplay: true,
+    autoplay: false,
     autoplayMs: 6000,
   },
   argTypes: {
@@ -98,10 +94,9 @@ const meta = {
     option: {
       name: "Figma option",
       control: "inline-radio",
-      options: ["option1", "option2"],
+      options: ["option1", "option2", "option3", "option4"],
       table: { category: "Carousel" },
     },
-    dir: { control: "inline-radio", options: ["rtl", "ltr"], table: { category: "Fit" } },
     initialIndex: {
       control: { type: "range", min: 0, max: 5, step: 1 },
       table: { category: "Carousel" },
@@ -123,20 +118,47 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const FitLab: Story = {};
 export const Option1: Story = {
-  name: "Option 1",
-  args: { option: "option1", width: 1440, height: 491, autoplay: false },
+  name: "Option 1 — Hero Section V2",
+  args: { option: "option1" },
 };
-export const Wide: Story = { args: { option: "option2", width: 1440, height: 491 } };
-export const Mid: Story = { args: { width: 900, height: 380, autoplay: false } };
-export const Narrow: Story = { args: { width: 390, height: 760, autoplay: false } };
-export const LTR: Story = { args: { width: 900, height: 380, dir: "ltr", autoplay: false } };
+
+export const Option2: Story = {
+  name: "Option 2 — Asset Deck",
+  args: { option: "option2", autoplay: true },
+};
+
+export const Option3: Story = {
+  name: "Option 3 — Framed Photo",
+  args: { option: "option3" },
+};
+
+export const Option4: Story = {
+  name: "Option 4 — Pattern Panel",
+  args: { option: "option4" },
+};
+
+export const FitLab: Story = {
+  args: { option: "option2", width: 900, height: 380 },
+};
+
+export const Compact: Story = {
+  name: "Compact peek",
+  args: { option: "option2", width: 390, height: 760 },
+};
+
+export const English: Story = {
+  name: "English (inherited lang)",
+  args: { option: "option2", autoplay: false },
+  globals: { locale: "en" },
+};
+
 export const FromJsDelivr: Story = {
   name: "From jsDelivr",
-  args: { bundle: JSDELIVR_UMD, autoplay: false },
+  args: { bundle: JSDELIVR_UMD, option: "option1" },
 };
+
 export const FromUnpkg: Story = {
   name: "From unpkg",
-  args: { bundle: UNPKG_UMD, autoplay: false },
+  args: { bundle: UNPKG_UMD, option: "option1" },
 };

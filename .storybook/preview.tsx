@@ -1,6 +1,38 @@
 import type { Preview } from "@storybook/react-vite";
 
 const preview: Preview = {
+  globalTypes: {
+    locale: {
+      description: "Inherited page language. The carousel reads lang from this wrapper.",
+      toolbar: {
+        title: "Locale",
+        icon: "globe",
+        items: [
+          { value: "ar", title: "العربية", right: "RTL" },
+          { value: "en", title: "English", right: "LTR" },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
+  initialGlobals: {
+    locale: "ar",
+  },
+  decorators: [
+    (Story, context) => {
+      const locale = context.globals.locale === "en" ? "en" : "ar";
+      return (
+        <div
+          key={locale}
+          lang={locale}
+          dir={locale === "ar" ? "rtl" : "ltr"}
+          style={{ width: "100%" }}
+        >
+          <Story />
+        </div>
+      );
+    },
+  ],
   parameters: {
     layout: "centered",
     controls: {

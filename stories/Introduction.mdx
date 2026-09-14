@@ -6,7 +6,43 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 Stories load the published **UMD** from [npm](https://www.npmjs.com/package/saudi-national-day-carousel) via jsDelivr or unpkg — the same URLs a host page would use.
 
-- jsDelivr: `https://cdn.jsdelivr.net/npm/saudi-national-day-carousel@1.0.1/dist/saudi-national-day-carousel.umd.js`
-- unpkg: `https://unpkg.com/saudi-national-day-carousel@1.0.1/dist/saudi-national-day-carousel.umd.js`
+- jsDelivr: `https://cdn.jsdelivr.net/npm/saudi-national-day-carousel@1.1.0/dist/saudi-national-day-carousel.umd.js`
+- unpkg: `https://unpkg.com/saudi-national-day-carousel@1.1.0/dist/saudi-national-day-carousel.umd.js`
 
-Use **Fit Lab** to resize the parent, flip RTL/LTR, and tune motion. Compact peek appears around `390×760`. Switch **UMD source** to compare CDNs.
+Use the **Locale** toolbar to switch `lang` on the wrapping page. The carousel inherits Arabic (RTL) or English (LTR) from that attribute; you can still pass `locale` to `mount()` to override.
+
+Each Figma option has its own story. **Portal template** drops the hero into a home-page shell inspired by [dev-dga-templates](https://github.com/DevDhaif/dev-dga-templates) (independent, not affiliated with the DGA).
+
+| Story | Figma |
+| --- | --- |
+| Option 1 | Hero Section V2 — mosaic / scatter / field |
+| Option 2 | Asset Deck — stacked cards |
+| Option 3 | Vision-Framed_Photo |
+| Option 4 | SND Patterns |
+
+## Where it runs
+
+The carousel is **client-side only**. A Laravel, ASP.NET, Django, or Odoo route can still serve it: render a sized empty host in the page, then call `mount()` in the browser. It does not SSR or hydrate server HTML.
+
+| Host | How |
+| --- | --- |
+| React / Next.js | ESM component, or `dynamic(..., { ssr: false })` |
+| Vue / Nuxt | `onMounted` + `mount()`, wrap in `<ClientOnly>` on Nuxt |
+| Angular | `AfterViewInit` + `mount()`, `OnDestroy` + `unmount()` |
+| Laravel, .NET, Rails, PHP | Blade / Razor host `div` + CDN script |
+| Odoo Website | QWeb host + frontend asset, not QWeb server render |
+
+```js
+SaudiNationalDayCarousel.mount("#hero", {
+  option: "option3",
+  option3: [{ title: { ar: "عِزّنا", en: "Our pride" }, coloredTitle: { ar: "برؤيتنا", en: "in our vision" } }],
+});
+
+SaudiNationalDayCarousel.mount("#hero", (defaults) => ({
+  ...defaults,
+  option: "option2",
+  option2: defaults.option2.slice(0, 3),
+}));
+```
+
+Full recipes live in the [package README](https://github.com/farhat-baaroun/saudi-national-day-carousel#client-side-only-csr).
