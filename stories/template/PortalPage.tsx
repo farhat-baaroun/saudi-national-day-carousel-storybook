@@ -40,12 +40,22 @@ const COPY = {
 export type PortalPageProps = {
   option: CarouselOption;
   bundle?: string;
+  locale?: Locale;
 };
 
-export function PortalPage({ option, bundle = JSDELIVR_UMD }: PortalPageProps) {
-  const [locale, setLocale] = useState<Locale>("ar");
+export function PortalPage({
+  option,
+  bundle = JSDELIVR_UMD,
+  locale: localeProp = "ar",
+}: PortalPageProps) {
+  const [locale, setLocale] = useState<Locale>(localeProp);
   const hostRef = useRef<HTMLDivElement>(null);
+  const [error, setError] = useState<string | null>(null);
   const copy = COPY[locale];
+
+  useEffect(() => {
+    setLocale(localeProp);
+  }, [localeProp]);
 
   useEffect(() => {
     const el = hostRef.current;
@@ -55,6 +65,7 @@ export function PortalPage({ option, bundle = JSDELIVR_UMD }: PortalPageProps) {
 
     let mounted = true;
     let handle: { unmount: () => void } | undefined;
+    setError(null);
 
     loadUmdScript(bundle)
       .then((api) => {
@@ -63,11 +74,14 @@ export function PortalPage({ option, bundle = JSDELIVR_UMD }: PortalPageProps) {
         }
         handle = api.mount(hostRef.current, {
           option,
+          locale,
           autoplayMs: false,
         });
       })
-      .catch((error) => {
-        console.error(error);
+      .catch((caught) => {
+        const text = caught instanceof Error ? caught.message : String(caught);
+        setError(text);
+        console.error(caught);
       });
 
     return () => {
@@ -107,6 +121,11 @@ export function PortalPage({ option, bundle = JSDELIVR_UMD }: PortalPageProps) {
         </nav>
       </header>
       <section className="hp-hero" aria-label={locale === "ar" ? "القسم الرئيسي" : "Hero"}>
+        {error ? (
+          <p className="hp-disclaimer" role="alert">
+            {error}
+          </p>
+        ) : null}
         <div className="hp-hero__mount" ref={hostRef} />
       </section>
       <section className="hp-section">

@@ -9,16 +9,22 @@ Stories load the published **UMD** from [npm](https://www.npmjs.com/package/saud
 - jsDelivr: `https://cdn.jsdelivr.net/npm/saudi-national-day-carousel@1.1.0/dist/saudi-national-day-carousel.umd.js`
 - unpkg: `https://unpkg.com/saudi-national-day-carousel@1.1.0/dist/saudi-national-day-carousel.umd.js`
 
-Use the **Locale** toolbar to switch `lang` on the wrapping page. The carousel inherits Arabic (RTL) or English (LTR) from that attribute; you can still pass `locale` to `mount()` to override.
+Use the **Locale** toolbar to switch `lang` on the wrapping page. Stories also pass `locale` into `mount()` so the bundle remounts when you switch Arabic (RTL) and English (LTR).
 
-Each Figma option has its own story. **Portal template** drops the hero into a home-page shell inspired by [dev-dga-templates](https://github.com/DevDhaif/dev-dga-templates) (independent, not affiliated with the DGA).
+**Portal template** drops the hero into a home-page shell inspired by [dev-dga-templates](https://github.com/DevDhaif/dev-dga-templates) (independent, not affiliated with the DGA).
 
-| Story | Figma |
-| --- | --- |
-| Option 1 | Hero Section V2 — mosaic / scatter / field |
-| Option 2 | Asset Deck — stacked cards |
-| Option 3 | Vision-Framed_Photo |
-| Option 4 | SND Patterns |
+## Options
+
+Two motion variants and three asset sets. Options 2–4 share the same six values (heritage → support → ambition → generosity → kindness → vision). Option 1 keeps its own mosaic / scatter / field copy.
+
+| Story | Motion | Assets |
+| --- | --- | --- |
+| Option 1 — Figures | No stagger | `option1/*` only |
+| Option 2 — Photo deck | Staggered deck + arrows | `slides/*.png` |
+| Option 3 — Pattern slides | No stagger | `slides_patterns/*.svg` |
+| Option 4 — Pattern deck | Staggered deck + arrows | `slides_patterns/*.svg` |
+
+Paired files: `vision.png` ↔ `vision.svg`, and the same for the other five values.
 
 ## Where it runs
 

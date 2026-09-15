@@ -3,7 +3,7 @@ import type { Preview } from "@storybook/react-vite";
 const preview: Preview = {
   globalTypes: {
     locale: {
-      description: "Inherited page language. The carousel reads lang from this wrapper.",
+      description: "Page language. Stories set lang/dir on the wrapper and pass locale to mount().",
       toolbar: {
         title: "Locale",
         icon: "globe",
