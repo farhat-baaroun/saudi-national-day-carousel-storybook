@@ -1,6 +1,8 @@
 # Saudi National Day Carousel Storybook
 
-GitHub: [farhat-baaroun/saudi-national-day-carousel-storybook](https://github.com/farhat-baaroun/saudi-national-day-carousel-storybook)
+Live: [saudi-national-day-carousel-storybo.vercel.app](https://saudi-national-day-carousel-storybo.vercel.app)
+
+Design: [Saudi National Day Template](https://www.figma.com/community/file/1542530337501214682/saudi-national-day-template) on Figma Community.
 
 Independent Storybook for [`saudi-national-day-carousel` on npm](https://www.npmjs.com/package/saudi-national-day-carousel).
 

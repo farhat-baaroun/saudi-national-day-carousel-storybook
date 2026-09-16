@@ -8,7 +8,7 @@ export type UmdApi = {
   unmount: (target: string | Element) => void;
 };
 
-const PACKAGE = "saudi-national-day-carousel@1.1.0";
+const PACKAGE = "saudi-national-day-carousel@1.2.0";
 const UMD_FILE = "dist/saudi-national-day-carousel.umd.js";
 
 export const JSDELIVR_UMD = `https://cdn.jsdelivr.net/npm/${PACKAGE}/${UMD_FILE}`;
