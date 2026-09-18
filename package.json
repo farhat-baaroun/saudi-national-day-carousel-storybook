@@ -7,6 +7,9 @@
     "url": "git+https://github.com/farhat-baaroun/saudi-national-day-carousel-storybook.git"
   },
   "type": "module",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  },
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
