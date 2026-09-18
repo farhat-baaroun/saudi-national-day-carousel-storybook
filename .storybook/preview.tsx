@@ -1,4 +1,5 @@
 import type { Preview } from "@storybook/react-vite";
+import { Analytics } from "@vercel/analytics/react";
 
 const preview: Preview = {
   globalTypes: {
@@ -29,6 +30,7 @@ const preview: Preview = {
           style={{ width: "100%" }}
         >
           <Story />
+          <Analytics />
         </div>
       );
     },
